@@ -1,11 +1,4 @@
-<ul>
-  <li>
-    <a href="/users">Users</a>
-  </li>
-  <li>
-    <a href="/photos">Photos</a>
-  </li>
-</ul>
+
 
  <h1><%= @the_user.username %></h1>
 
@@ -21,7 +14,7 @@
     Edit user
   </dt>
   <dd>
-    <form action="/update_user/117" method="post">
+    <form action="/update_user/<%= @the_user.id %>" method="post">
       <label for="browser_username">Username</label>
       <input id="browser_username" type="text" name="input_username" value=<%= @the_user.username %>>
 
@@ -60,14 +53,16 @@
     <img src="<%= a_photo.image %>">
   </td>
   <td>
-    <%= User.where({ :id => a_photo.owner_id }).at(0).username %></td>
+    <%#= User.where({ :id => a_photo.owner_id }).at(0).username %>
+    <%= a_photo.poster.username %> 
+  </td>
   <td><%= a_photo.caption %></td>
   <td><%= a_photo.created_at %></td>
   <td>
-    <a href="/users/<%= a_photo.username %>">
-          Show details
+    <a href="/users/<%= a_photo.poster.username %>">
+            Show details
     </a>
   </td>
 </tr>
-
+<% end %>
 </table>
